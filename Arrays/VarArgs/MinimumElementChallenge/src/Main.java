@@ -3,14 +3,7 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        int[] numArray = {1, 2, 3, 4, 5};
-        ReverseArrayChallenge.reverse(numArray);
 
-        String myInput = "Array = [1, 2, 3, 4, 5]Reversed array = [5, 4, 3, 4, 5]";
-        String ExpectedInput = "Array = [1, 2, 3, 4, 5]Reversed array = [5, 4, 3, 2, 1]";
-        if(myInput.equals(ExpectedInput)){
-
-        }
         int[] myNumArray = readIntegers();
         System.out.println("The min is: " + findMin(myNumArray));
 
