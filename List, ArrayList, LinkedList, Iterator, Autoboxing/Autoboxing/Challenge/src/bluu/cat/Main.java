@@ -1,6 +1,5 @@
 package bluu.cat;
 
-import java.sql.Array;
 import java.util.ArrayList;
 
 record Customer(String name, ArrayList<Double> transactions) {
@@ -39,8 +38,6 @@ class Bank {
 
     public Bank(String name) {
         this.name = name;
-
-
     }
 
     @Override
@@ -49,7 +46,6 @@ class Bank {
     }
 
     private Customer getCustomer(String customerName) {
-
         for (var customer : customers) {
             if (customer.name().equalsIgnoreCase(customerName)) {
                 return customer;

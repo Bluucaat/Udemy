@@ -22,6 +22,7 @@ public class Main {
 
     public static void main(String[] args) {
 
+
         LinkedList<Place> townList = new LinkedList<>();
 
         addPlace(townList, new Place("Adelaide", 1374));
@@ -40,7 +41,7 @@ public class Main {
         while (!quitLoop) {
             System.out.println(options);
 
-            if (!iterator.hasPrevious()){
+            if (!iterator.hasPrevious()) {
                 System.out.println("Originating: " + iterator.next());
                 forward = true;
             }
