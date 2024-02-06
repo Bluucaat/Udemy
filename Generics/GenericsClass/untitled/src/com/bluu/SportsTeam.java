@@ -1,4 +1,4 @@
-package bluu.cat;
+package com.bluu;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,12 +11,12 @@ public class SportsTeam {
     private int totalLosses = 0;
     private int totalTies = 0;
 
+
     public SportsTeam(String teamName) {
         this.teamName = teamName;
     }
 
     public void addTeamMember(Player player) {
-
         if (!teamMembers.contains(player)) {
             teamMembers.add(player);
         }
@@ -40,10 +40,9 @@ public class SportsTeam {
         } else if (ourScore == theirScore) {
             totalTies++;
             message = "tied";
-        } else {
+        } else if (ourScore < theirScore) {
             totalLosses++;
         }
-
         return message;
     }
 

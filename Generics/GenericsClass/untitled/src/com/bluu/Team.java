@@ -1,24 +1,24 @@
-package bluu.cat;
+package com.bluu;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class BaseballTeam {
+public class Team<T>{
 
     private String teamName;
-    private List<BaseballPlayer> teamMembers = new ArrayList<>();
+    private List<T> teamMembers = new ArrayList<>();
     private int totalWins = 0;
     private int totalLosses = 0;
     private int totalTies = 0;
 
-    public BaseballTeam(String teamName) {
+
+    public Team(String teamName) {
         this.teamName = teamName;
     }
 
-    public void addTeamMember(BaseballPlayer player) {
-
-        if (!teamMembers.contains(player)) {
-            teamMembers.add(player);
+    public void addTeamMember(T t) {
+        if (!teamMembers.contains(t)) {
+            teamMembers.add(t);
         }
     }
 
@@ -40,10 +40,9 @@ public class BaseballTeam {
         } else if (ourScore == theirScore) {
             totalTies++;
             message = "tied";
-        } else {
+        } else if (ourScore < theirScore) {
             totalLosses++;
         }
-
         return message;
     }
 
