@@ -1,14 +1,24 @@
 package com.bluu;
 
-interface Player{}
+interface Player {
 
-record BaseballPlayer(String name, String position)implements Player{}
+    String name();
+}
 
-record FootballPlayer(String name, String position)implements Player{}
+record BaseballPlayer(String name, String position) implements Player {
+}
+
+record FootballPlayer(String name, String position) implements Player {
+}
+
+record VolleyballPlayer(String name, String position) implements Player {
+}
 
 
 public class Main {
     public static void main(String[] args) {
+
+        var philly = new Affiliation("city", "Philadelphia, PA", "US");
 
         BaseballTeam phillies1 = new BaseballTeam("Philadelphia Phillies");
         BaseballTeam astros1 = new BaseballTeam("Houston Astros");
@@ -18,8 +28,8 @@ public class Main {
         SportsTeam astros2 = new SportsTeam("Houston Astros");
         scoreResult(phillies2, 3, astros2, 5);
 
-        Team<BaseballPlayer> phillies = new Team("Philadelphia Phillies");
-        Team<BaseballPlayer> astros = new Team("Houston Astros");
+        Team<BaseballPlayer, Affiliation> phillies = new Team("Philadelphia Phillies", philly);
+        Team<BaseballPlayer, Affiliation> astros = new Team("Houston Astros");
         scoreResult(phillies, 3, astros, 5);
 
         var harper = new BaseballPlayer("B Harper", "Right Fielder");
@@ -29,15 +39,22 @@ public class Main {
         phillies.listTeamMembers();
 
         SportsTeam afc1 = new SportsTeam("Adelaide Crows");
-        Team<FootballPlayer> afc = new Team<>("Adelaide Crows");
-        var tex = new FootballPlayer("Tex Walker", "Centre half forward");
+        Team<VolleyballPlayer, String> afc = new Team<>("Adelaide Crows", "City of Adelaide, South Australia, in AU");
+        var tex = new VolleyballPlayer("Tex Walker", "Setter");
         afc.addTeamMember(tex);
         afc.listTeamMembers();
+
+        var canberra = new Team<VolleyballPlayer, Affiliation>("Canberra Heat");
+        canberra.addTeamMember(new VolleyballPlayer("B Black", "Opposite"));
+        canberra.listTeamMembers();
+        scoreResult(canberra, 0, afc, 1);
+
+//        Team<Integer> melbourneVB = new Team<>("Melbourne Vipers");
 
     }
 
     public static void scoreResult(BaseballTeam team1, int t1_score,
-                                   BaseballTeam team2, int t2_score){
+                                   BaseballTeam team2, int t2_score) {
 
         String message = team1.setScore(t1_score, t2_score);
         team2.setScore(t2_score, t1_score);
@@ -45,7 +62,7 @@ public class Main {
     }
 
     public static void scoreResult(SportsTeam team1, int t1_score,
-                                   SportsTeam team2, int t2_score){
+                                   SportsTeam team2, int t2_score) {
 
         String message = team1.setScore(t1_score, t2_score);
         team2.setScore(t2_score, t1_score);
@@ -53,7 +70,7 @@ public class Main {
     }
 
     public static void scoreResult(Team team1, int t1_score,
-                                   Team team2, int t2_score){
+                                   Team team2, int t2_score) {
 
         String message = team1.setScore(t1_score, t2_score);
         team2.setScore(t2_score, t1_score);
