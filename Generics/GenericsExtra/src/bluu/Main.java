@@ -18,24 +18,74 @@ public class Main {
         for (int i = 0; i < studentCount; i++) {
             students.add(new Student());
         }
-        printList(students);
+        printMoreLists(students);
+//        printList(students);
 
         List<BluuStudent> bluuStudents = new ArrayList<>();
         for (int i = 0; i < studentCount; i++) {
             bluuStudents.add(new BluuStudent());
         }
 
-        //student type list takes BluuStudent.
+//      student type list takes BluuStudent.
         students.add(new BluuStudent());
+        printMoreLists(bluuStudents);
+//      printList(bluuStudents);
 
+        testList(new ArrayList<String>(List.of("Able", "Barry", "Charlie")));
+        testList(new ArrayList<Integer>(List.of(1, 2, 3)));
 
-        printList(bluuStudents);
     }
-    
-    public static void printList(List students){
+
+
+    //wildcard
+    public static void printMoreLists(List<? extends Student> students){
+
+//        unable to do the following, because this method won't know
+//        the type of the element its trying to access.
+//        Student last = students.get(students.size()-1);
+//        students.set(0, last);
+
         for(var student : students){
-            System.out.println(student);
+            System.out.println(student.getYearStarted() + ": " + student);
         }
         System.out.println();
     }
+
+    public static void testList(List<?> list){
+
+        for(var element: list){
+            if(element instanceof String s){
+                System.out.println("String " + s.toUpperCase());
+            }
+            else if(element instanceof Integer i){
+                System.out.println("Integer: " + i.floatValue());
+            }
+        }
+
+    }
 }
+//    public static void testList(List<String> list){
+//
+//        for(var element: list){
+//            System.out.println("String: " + element.toUpperCase());
+//        }
+//    }
+//
+//    //issues when overloading
+//    public static void testList(List<Integer> list){
+//        for(var element: list){
+//            System.out.println("Integer: " + element.floatValue());
+//        }
+//    }
+//}
+
+
+
+//upper bound
+//    public static <T extends Student> void printList(List<T> students){
+//        for(var student : students){
+//            System.out.println(student.getYearStarted() + ": " + student);
+//        }
+//        System.out.println();
+//    }
+//}
