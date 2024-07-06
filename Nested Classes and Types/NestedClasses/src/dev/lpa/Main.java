@@ -4,6 +4,7 @@ import dev.lpa.domain.Employee;
 import dev.lpa.domain.StoreEmployee;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Main {
@@ -41,6 +42,49 @@ public class Main {
 
         for (StoreEmployee e : storeEmployees) {
             System.out.println(e);
+        }
+
+        System.out.println("With pig latin names");
+        addPigLatinName(storeEmployees);
+    }
+
+    public static void addPigLatinName(List<? extends StoreEmployee> list){
+
+        String lastName = "Piggy";
+        class DecoratedEmployee extends StoreEmployee
+            implements Comparable<DecoratedEmployee> {
+
+            private String pigLatinName;
+            private Employee originalInstance;
+
+            public DecoratedEmployee(String pigLatinName, Employee originalInstance) {
+                this.pigLatinName = pigLatinName + " " + lastName;
+                this.originalInstance = originalInstance;
+            }
+
+            @Override
+            public String toString() {
+                return originalInstance.toString() + " " + pigLatinName;
+            }
+
+            @Override
+            public int compareTo(DecoratedEmployee o) {
+                return pigLatinName.compareTo(o.pigLatinName);
+            }
+        }
+
+        List<DecoratedEmployee> newList = new ArrayList<>(list.size());
+
+        for(var empoyee : list){
+            String name = empoyee.getName();
+            String pigLatin = name.substring(1)+name.charAt(0) + "ay";
+            newList.add(new DecoratedEmployee(pigLatin, empoyee));
+        }
+
+        newList.sort(null);
+        for(var dEmployee : newList){
+            System.out.println(dEmployee.originalInstance.getName() + " "
+            + dEmployee.pigLatinName);
         }
     }
 }
