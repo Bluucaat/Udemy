@@ -9,7 +9,7 @@ public class LambdaChallenge {
 
     private record Person(String first){
         public String last(String s){
-            return first + " " + s.substring(0, s.indexof(" "));
+            return first + " " + s.substring(0, s.indexOf(" "));
         }
     }
     public static void main(String[] args) {
