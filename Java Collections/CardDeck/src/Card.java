@@ -46,4 +46,21 @@ public record Card(Suit suit, String face, int rank) {
         }
         return cardList;
     }
+    public static void printDeck(List<Card> deck){
+        printDeck(deck, "Current Deck", 4);
+    }
+
+    public static void printDeck(List<Card> deck, String description, int rows){
+        System.out.println("-".repeat(20));
+        if(description != null){
+            System.out.println(description);
+        }
+        int cardsInRow = deck.size()/rows;
+        for(int i = 0; i < rows; i++){
+            int startIndex = i*cardsInRow;
+            int endIndex = startIndex + cardsInRow;
+            deck.subList(startIndex, endIndex).forEach(c -> System.out.print(c + " "));
+            System.out.println();
+        }
+    }
 }
