@@ -28,5 +28,34 @@ public class Main {
         cards2 = List.copyOf(kingsOfClubs);
         Card.printDeck(cards2, "List copy of Kings of club", 2);
 
+        List<Card> deck = Card.getStandardDeck();
+        Card.printDeck(deck);
+        Collections.shuffle(deck);
+        Card.printDeck(deck, "Shuffled deck", 4);
+
+        Collections.reverse(deck);
+        var sortingAlgorithm = Comparator.comparing(Card::rank)
+                .thenComparing(Card::suit);
+        Collections.sort(deck, sortingAlgorithm);
+        Card.printDeck(deck, "Sorted deck", 13);
+        Collections.reverse(deck);
+        Card.printDeck(deck, "Reverse deck", 13);
+
+        List<Card> kings = new ArrayList<>(deck.subList(4, 8));
+        Card.printDeck(kings, "Kings", 2);
+
+        List<Card> tens = new ArrayList<>(deck.subList(16, 20));
+        Card.printDeck(tens, "Tens", 2);
+
+        //if sublist found gives index
+        int subListIndex = Collections.indexOfSubList(deck, tens);
+        System.out.println(subListIndex);
+        System.out.println("Contains = "  + deck.containsAll(tens));
+
+        boolean disjoint = Collections.disjoint(deck, kings);
+        System.out.println("disjoint = " + disjoint);
+
+        boolean disjoint2 = Collections.disjoint(tens, kings);
+        System.out.println("disjoint = " + disjoint2);
     }
 }
