@@ -1,3 +1,4 @@
+package course;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,7 +38,7 @@ public record Card(Suit suit, String face, int rank) {
     public static List<Card> getStandardDeck() {
         List<Card> cardList = new ArrayList<>();
         for (Suit suit : Suit.values()) {
-            for (int j = 2; j < 10; j++) {
+            for (int j = 2; j < 11; j++) {
                 cardList.add(getNumbericCard(suit, j));
             }
             for(char c : new char[]{'J', 'Q', 'K', 'A'}){
