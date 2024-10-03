@@ -1,0 +1,18 @@
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.control.Button?>
+<FlowPane fx:controller="com.bluu.layouts.HelloController"
+          xmlns:fx="http://javafx.com.com/fxml" orientation="VERTICAL" vgap="10" hgap="10">
+
+    <Button text = "Button"/>
+    <Button text = "Button"/>
+    <Button text = "Button"/>
+    <Button text = "Button"/>
+    <Button text = "Button"/>
+    <Button text = "Button"/>
+    <Button text = "Button"/>
+    <Button text = "Button"/>
+    <Button text = "Button"/>
+    <Button text = "Button"/>
+    <Button text = "Button"/>
+    <Button text = "Button"/>
+</FlowPane>
