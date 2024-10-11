@@ -42,5 +42,54 @@ public class TreeSetMain {
         System.out.println("Last element = " + copiedSet.pollLast());
         copiedSet.forEach(System.out::println);
 
+        Contact daffy = new Contact("Daffy duck");
+        Contact daisy = new Contact("Daisy Duck");
+        Contact snoopy = new Contact("Snoopy");
+        Contact archie = new Contact("Archie");
+
+        for (Contact c : List.of(daffy, daisy, max2, snoopy)) {
+            //equals to value passed
+            System.out.printf("ceiling(%s)=%s%n", c.getName(), fullSet.ceiling(c));
+            //next greater element
+            System.out.printf("higher(%s)=%s%n", c.getName(), fullSet.higher(c));
+        }
+        System.out.println("-".repeat(20));
+
+        for (Contact c : List.of(daffy, daisy, min2, archie)) {
+            //equals to value passed
+            System.out.printf("floor(%s)=%s%n", c.getName(), fullSet.floor(c));
+            //next greater element
+            System.out.printf("lower(%s)=%s%n", c.getName(), fullSet.lower(c));
+        }
+        System.out.println("-".repeat(20));
+
+        //backed by original set
+        NavigableSet<Contact> descendingSet = fullSet.descendingSet();
+        descendingSet.forEach(System.out::println);
+        System.out.println("-".repeat(20));
+
+        Contact lastContact = descendingSet.pollLast();
+        System.out.println("removed: " + lastContact);
+        descendingSet.forEach(System.out::println);
+        System.out.println("-".repeat(20));
+        fullSet.forEach(System.out::println);
+        System.out.println("-".repeat(20));
+
+        //exclusive, unless overridden
+        Contact marion = new Contact("Maid Marion");
+        var headSet =  fullSet.headSet(marion, true);
+        headSet.forEach(System.out::println);
+        System.out.println("-".repeat(20));
+
+
+        var tailSet =  fullSet.tailSet(marion, false);
+        tailSet.forEach(System.out::println);
+        System.out.println("-".repeat(20));
+
+        //includes first, excludes last. can be overloaded.
+        Contact linus = new Contact("Linus");
+        var subset = fullSet.subSet(linus, false, marion, true);
+        subset.forEach(System.out::println);
+        System.out.println("-".repeat(20));
     }
 }
