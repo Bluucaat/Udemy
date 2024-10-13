@@ -65,6 +65,46 @@ public class MapMain {
                 Contact::mergeContactData));
 
         contacts.forEach((k, v) -> System.out.println(k + ": " + v));
+        System.out.println("-".repeat(20));
+        for(String contactName : new String[]{"Daisy Duck", "Daffy Duck", "Scrooge McDuck"}){
+            contacts.computeIfAbsent(contactName, k -> new Contact(k));
+        }
+        contacts.forEach((k, v) -> System.out.println(k + ": " + v));
 
+        System.out.println("-".repeat(20));
+        for(String contactName : new String[]{"Daisy Duck", "Daffy Duck", "Scrooge McDuck"}){
+            contacts.computeIfPresent(contactName, (k, v) -> {
+                v.addEmail("Fun Place"); return v;
+            });
+        }
+        contacts.forEach((k, v) -> System.out.println(k + ": " + v));
+        System.out.println("-".repeat(20));
+        contacts.replaceAll((k, v) -> {
+            String newEmail = k.replaceAll(" ", "") + "@funplace.com";
+            v.replaceEmailIfExists("DDuck@funplace.com", newEmail);
+            return v;
+        });
+        contacts.forEach((k, v) -> System.out.println(k + ": " + v));
+        Contact daisy = new Contact("Daisy Jones Duck", "daisyj@duck.com");
+        Contact replacedContact = contacts.replace("Daisy Duck", daisy);
+        System.out.println(daisy  + " replaced by: " + replacedContact);
+
+        System.out.println("-".repeat(20));
+        Contact updatedDaisy = replacedContact.mergeContactData(daisy);
+        System.out.println(updatedDaisy + " updated");
+        boolean success = contacts.replace("Daisy Duck", replacedContact,
+                daisy);
+        if(success) {
+            System.out.println("THe code succesfully replaced the element");
+        }else{
+            System.out.println("Did not match on both key, and value, not replaced.");
+        }
+        System.out.println("-".repeat(20));
+        success = contacts.remove("Daisy Duck", daisy);
+        if(success) {
+            System.out.println("THe code succesfully removed the element");
+        }else{
+            System.out.println("Did not match on both key, and value, not removed.");
+        }
     }
 }
