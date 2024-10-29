@@ -1,6 +1,8 @@
 package com.bluu.todolistapp.controller;
 
 import com.bluu.todolistapp.model.ToDoItem;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -13,6 +15,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Controller {
+
+    private @FXML Label deadLineLabel;
 
     private @FXML List<ToDoItem> toDoItems;
 
@@ -34,17 +38,27 @@ public class Controller {
         toDoItems.add(new ToDoItem("Pick up Doug at the train station", "Doug's arriving on march 23. (5 O'clock train)",
                 LocalDate.of(2024, Month.MARCH, 23)));
 
+        toDoListView.getSelectionModel().selectedItemProperty().addListener(
+                new ChangeListener<ToDoItem>() {
+                    @Override
+                    public void changed(ObservableValue<? extends ToDoItem> observableValue, ToDoItem oldValue, ToDoItem newValue) {
+                        if(newValue != null){
+                            ToDoItem item = toDoListView.getSelectionModel().getSelectedItem();
+                            itemDetailsTextArea.setText(item.getDetails());
+                            deadLineLabel.setText(item.getDueDate().toString());
+                        }
+                    }
+                }
+        );
+
         toDoListView.getItems().setAll(toDoItems);
         toDoListView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+        toDoListView.getSelectionModel().selectFirst();
     }
 
     public @FXML void handleClickListView() {
         ToDoItem item = (ToDoItem) toDoListView.getSelectionModel().getSelectedItem();
-        StringBuilder sb = new StringBuilder(item.getDetails());
-        sb.append("\n\n\n\n");
-        sb.append("Due: ");
-        sb.append(item.getDueDate().toString());
-
-        itemDetailsTextArea.setText(sb.toString());
+        itemDetailsTextArea.setText(item.getDetails());
+        deadLineLabel.setText(item.getDueDate().toString());
     }
 }

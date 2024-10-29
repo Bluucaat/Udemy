@@ -8,6 +8,8 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
 <BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.bluu.todolistapp.controller.Controller">
     <left>
         <ListView fx:id="toDoListView" onMouseClicked="#handleClickListView">
@@ -15,6 +17,20 @@
         </ListView>
     </left>
     <center>
-        <TextArea fx:id="itemDetailsTextArea"/>
+        <VBox style="-fx-background-color: white">
+        <TextArea fx:id="itemDetailsTextArea" VBox.vgrow="ALWAYS"/>
+            <HBox>
+                <Label text="Due: " style="-fx-background-color: white">
+                    <font>
+                        <Font name = "Times New Roman bold" size="20"/>
+                    </font>
+                </Label>
+                <Label fx:id = "deadLineLabel" style="-fx-background-color: white">
+                    <font>
+                        <Font name = "Times New Roman bold" size="20"/>
+                    </font>
+                </Label>
+            </HBox>
+        </VBox>
     </center>
 </BorderPane>
